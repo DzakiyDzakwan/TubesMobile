@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
        mahasiswa = arrayListOf(
             MahasiswaClass("211402006", R.drawable.donny, "Donny Adithya", "example@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5),
             MahasiswaClass("211402009", R.drawable.avatar2, "Mutia Rahmah", "example@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5),
-            MahasiswaClass("211402018", R.drawable.avatar3, "Talitha Syafiyah", "example@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5),
+            MahasiswaClass("211402018", R.drawable.talitha, "Talitha Syafiyah", "talithasyafiyah1112@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5),
             MahasiswaClass("211402036", R.drawable.avatar4, "Fatma Ananta Sari", "example@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5),
             MahasiswaClass("211402075", R.drawable.dzakiy, "Dzakiy Dzakwan", "dzakcart@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5),
             MahasiswaClass("211402084", R.drawable.caesto, "Caesto Marco", "example@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5)
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         imageList = arrayOf(
             R.drawable.donny,
             R.drawable.avatar2,
-            R.drawable.avatar3,
+            R.drawable.talitha,
             R.drawable.avatar4,
             R.drawable.dzakiy,
             R.drawable.caesto
