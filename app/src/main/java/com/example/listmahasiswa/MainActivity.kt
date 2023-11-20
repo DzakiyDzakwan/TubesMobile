@@ -23,29 +23,41 @@ class MainActivity : AppCompatActivity() {
 
        mahasiswa = arrayListOf(
             MahasiswaClass("211402006", R.drawable.donny, "Donny Adithya", "example@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5),
-            MahasiswaClass("211402009", R.drawable.mutia, "Mutia Rahmah", "rahmahm868@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5),
+            MahasiswaClass("211402009", R.drawable.mutia, "Mutia Rahmah", "example@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5),
             MahasiswaClass("211402018", R.drawable.talitha, "Talitha Syafiyah", "talithasyafiyah1112@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5),
-            MahasiswaClass("211402036", R.drawable.avatar4, "Fatma Ananta Sari", "example@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5),
+            MahasiswaClass("211402024", R.drawable.jauza, "Jauza Hayah Anbari", "example@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5),
+            MahasiswaClass("211402036", R.drawable.fatma, "Fatma Ananta Sari", "example@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5),
+            MahasiswaClass("211402045", R.drawable.anhar, "Al Anhar Sufi", "example@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5),
             MahasiswaClass("211402075", R.drawable.dzakiy, "Dzakiy Dzakwan", "dzakcart@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5),
-            MahasiswaClass("211402084", R.drawable.caesto, "Caesto Marco", "example@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5)
+            MahasiswaClass("211402084", R.drawable.caesto, "Caesto Marco", "example@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5),
+            MahasiswaClass("211402090", R.drawable.neha, "Neha Sabila Nazmira", "example@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5),
+            MahasiswaClass("211402111", R.drawable.vincent, "Vincent Enrique", "example@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5)
         )
 
         imageList = arrayOf(
             R.drawable.donny,
             R.drawable.mutia,
             R.drawable.talitha,
-            R.drawable.avatar4,
+            R.drawable.jauza,
+            R.drawable.fatma,
+            R.drawable.anhar,
             R.drawable.dzakiy,
-            R.drawable.caesto
+            R.drawable.caesto,
+            R.drawable.neha,
+            R.drawable.vincent
         )
 
         nameList = arrayOf(
             "Donny Adithya",
             "Mutia Rahmah",
             "Talitha Syafiyah",
+            "Jauza Hayah Anbari",
             "Fatma Ananta Sari",
+            "Al Anhar Sufi",
             "Dzakiy Dzakwan",
-            "Caesto Marco"
+            "Caesto Marco",
+            "Neha Sabila Nazmira",
+            "Vincent EnriqueL"
         )
 
         recyclerView = findViewById(R.id.recyleView)
