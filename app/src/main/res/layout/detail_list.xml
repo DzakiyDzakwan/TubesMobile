@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:text="Detail Date"
                 android:textSize="14sp"
-                android:textColor="@android:color/red"
+                android:textColor="@android:color/holo_red_dark"
                 android:layout_below="@+id/radioGroupDetailTitle"
                 android:fontFamily="@font/bold"
                 android:layout_marginTop="8dp"/>
