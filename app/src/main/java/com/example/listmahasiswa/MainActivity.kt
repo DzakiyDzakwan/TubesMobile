@@ -3,8 +3,10 @@ package com.example.listmahasiswa
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+//import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.inappmessaging.model.Button
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,6 +22,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val buttonToDoList: android.widget.Button = findViewById(R.id.buttonToDoList)
+        buttonToDoList.setOnClickListener {
+            val intent = Intent(this, ToDoListActivity::class.java)
+            startActivity(intent)
+        }
 
        mahasiswa = arrayListOf(
             MahasiswaClass("211402006", R.drawable.donny, "Donny Adithya", "example@gmail.com", "Ilmu Komputer dan Teknologi Informasi", "Teknologi Informasi", 5),
@@ -60,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             "Vincent EnriqueL"
         )
 
-        recyclerView = findViewById(R.id.recyleView)
+        recyclerView = findViewById(R.id.recycleView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
 
