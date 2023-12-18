@@ -13,10 +13,17 @@
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:text="AgendArc"
         android:textSize="24sp"
         android:fontFamily="@font/bold"
         android:layout_centerHorizontal="true" />
+=======
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/bold"
+        android:text="AgendArc"
+        android:textSize="24sp" />
+>>>>>>> origin/master
 
     <!-- Deskripsi Judul -->
     <TextView
