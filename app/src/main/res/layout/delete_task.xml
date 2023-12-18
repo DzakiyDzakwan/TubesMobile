@@ -14,7 +14,8 @@
         android:text="AgendArc"
         android:textSize="24sp"
         tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="26dp" />
+        tools:layout_editor_absoluteY="26dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textViewDescription3"
@@ -27,7 +28,8 @@
         android:textColor="@color/blue"
         app:cardCornerRadius="8dp"
         tools:layout_editor_absoluteX="99dp"
-        tools:layout_editor_absoluteY="68dp" />
+        tools:layout_editor_absoluteY="68dp"
+        tools:ignore="MissingConstraints" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="600px"
@@ -37,13 +39,14 @@
         app:cardCornerRadius="20px"
         tools:layout_editor_absoluteX="91dp"
         tools:layout_editor_absoluteY="137dp"
-        tools:visibility="visible">
+        tools:visibility="visible"
+        tools:ignore="MissingConstraints" >
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#4CAF50"
+            android:backgroundTint="#58C15C"
             android:drawableTint="#FFEB3B"
             android:foregroundTint="#FFEB3B"
             android:text="Tidak"
@@ -54,7 +57,7 @@
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#F44336"
+            android:backgroundTint="#F84B3E"
             android:drawableTint="#FFEB3B"
             android:foregroundTint="#FFEB3B"
             android:text="Ya"

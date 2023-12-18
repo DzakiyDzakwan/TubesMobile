@@ -14,20 +14,22 @@
         android:text="AgendArc"
         android:textSize="24sp"
         tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="26dp" />
+        tools:layout_editor_absoluteY="26dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textViewDescription4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewTitle3"
+        android:layout_below="@id/textViewTitle4"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/medium"
         android:text="Make Your Schedule be Better"
         android:textColor="@color/blue"
         app:cardCornerRadius="8dp"
         tools:layout_editor_absoluteX="99dp"
-        tools:layout_editor_absoluteY="68dp" />
+        tools:layout_editor_absoluteY="68dp"
+        tools:ignore="MissingConstraints" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="600px"
@@ -37,7 +39,8 @@
         app:cardCornerRadius="20px"
         tools:layout_editor_absoluteX="91dp"
         tools:layout_editor_absoluteY="124dp"
-        tools:visibility="visible">
+        tools:visibility="visible"
+        tools:ignore="MissingConstraints" >
 
         <EditText
             android:id="@+id/editTextText2"
@@ -85,7 +88,7 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#4CAF50"
+            android:backgroundTint="#5DBF61"
             android:drawableTint="#FFEB3B"
             android:foregroundTint="#FFEB3B"
             android:text="Selesai"
@@ -96,7 +99,7 @@
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#FFEB3B"
+            android:backgroundTint="#F4E451"
             android:drawableTint="#FFEB3B"
             android:foregroundTint="#FFEB3B"
             android:text="Batal"
