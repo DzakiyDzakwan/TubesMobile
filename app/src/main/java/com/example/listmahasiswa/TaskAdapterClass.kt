@@ -12,7 +12,7 @@ class TaskAdapterClass(private val taskList: ArrayList<TaskClass>): RecyclerView
     var onItemClick: ((TaskClass)->Unit) ? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderTaskClass {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_layout, parent, false)
         return ViewHolderTaskClass(itemView)
     }
 
@@ -31,6 +31,6 @@ class TaskAdapterClass(private val taskList: ArrayList<TaskClass>): RecyclerView
     }
 
     class ViewHolderTaskClass(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val rvTaskName:TextView = itemView.findViewById(R.id.student_name)
+        val rvTaskName:TextView = itemView.findViewById(R.id.textViewTask)
     }
 }
