@@ -16,7 +16,7 @@
 
         <!-- Check Box -->
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/task_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +24,7 @@
 
         <!-- Text -->
         <TextView
-            android:id="@+id/textViewTask"
+            android:id="@+id/task_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -32,15 +32,15 @@
             android:text="Tugas 1"
             android:textSize="20sp"
             android:fontFamily="@font/medium"
-            app:layout_constraintStart_toEndOf="@+id/checkBox"
-            app:layout_constraintEnd_toStartOf="@+id/textViewDate"
+            app:layout_constraintStart_toEndOf="@+id/task_status"
+            app:layout_constraintEnd_toStartOf="@+id/task_date"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.5"/>
 
         <!-- Tanggal -->
         <TextView
-            android:id="@+id/textViewDate"
+            android:id="@+id/task_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="12/12/2023"

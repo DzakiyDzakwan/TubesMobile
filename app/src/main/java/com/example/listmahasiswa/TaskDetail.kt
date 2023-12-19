@@ -24,15 +24,17 @@ class TaskDetail : AppCompatActivity() {
             val taskNameTextView: TextView = findViewById(R.id.textViewDetailTitle)
             val taskDeadlineTextView: TextView = findViewById(R.id.textViewDetailDate)
 
-            taskNameTextView.text = "Task Name: ${task.name}"
+            val taskName = "Task Name: ${task.name}"
+            taskNameTextView.text = taskName
 
             // Check if the deadline_at property is not null before formatting
-            val formattedDate = task.deadline_at?.let {
+            val formattedDate = task.deadlineAt?.let {
                 val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
                 dateFormat.format(it)
             } ?: "N/A" // Provide a default value if deadline_at is null
 
-            taskDeadlineTextView.text = "Deadline: $formattedDate"
+            val deadlineText = "Deadline: ${formattedDate}"
+            taskDeadlineTextView.text = deadlineText
         } else
         {
             // Handle the case where task is null

@@ -3,6 +3,7 @@ package com.example.listmahasiswa
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listmahasiswa.model.TaskClass
@@ -15,8 +16,7 @@ class TaskAdapterClass(private val taskList: ArrayList<TaskClass>): RecyclerView
     var onItemClick: ((TaskClass)->Unit) ? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderTaskClass {
-        val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.list_layout, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_layout, parent, false)
         return ViewHolderTaskClass(itemView)
     }
 
@@ -26,8 +26,10 @@ class TaskAdapterClass(private val taskList: ArrayList<TaskClass>): RecyclerView
         holder.rvTaskName.text = currentItem.name
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
         val formattedDate =
-            currentItem.deadline_at.toInstant().atZone(ZoneId.systemDefault()).format(formatter)
+            currentItem.deadlineAt?.toInstant()?.atZone(ZoneId.systemDefault())?.format(formatter)
         holder.rvTaskDeadline.text = formattedDate
+
+        holder.rvTaskStatus.isChecked = currentItem.markAsFinished
 
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(currentItem)
@@ -36,11 +38,12 @@ class TaskAdapterClass(private val taskList: ArrayList<TaskClass>): RecyclerView
 
     override fun getItemCount(): Int {
         return taskList.size
+
     }
 
-    class ViewHolderTaskClass(itemView: View): RecyclerView.ViewHolder(itemView)
-    {
-        val rvTaskName: TextView = itemView.findViewById(R.id.textViewTask)
-        val rvTaskDeadline: TextView = itemView.findViewById(R.id.textViewDate)
+    class ViewHolderTaskClass(itemView: View): RecyclerView.ViewHolder(itemView) {
+        val rvTaskName:TextView = itemView.findViewById(R.id.task_name)
+        val rvTaskDeadline:TextView = itemView.findViewById(R.id.task_date)
+        val rvTaskStatus:CheckBox = itemView.findViewById(R.id.task_status)
     }
 }
