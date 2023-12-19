@@ -6,7 +6,7 @@ import retrofit2.http.GET
 
 interface APIService
 {
-    @GET("http://192.168.236.147:3333/api/v1/task/")
+    @GET("http://192.168.43.85:3333/api/v1/task/")
     fun getData(): Call<ResponseModel>
 //    fun getData(@Body data: DataModel): Call<ResponseModel>
 }
