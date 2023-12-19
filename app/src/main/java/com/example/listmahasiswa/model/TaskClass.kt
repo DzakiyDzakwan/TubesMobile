@@ -6,6 +6,7 @@ import java.util.Date
 
 data class TaskClass(val id: Int,
                      val name: String,
+                     val description: String,
                      val mark_as_finished: UByte,
                      val started_at: Date,
                      val deadline_at: Date,
@@ -15,22 +16,23 @@ data class TaskClass(val id: Int,
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString()!!,
+        parcel.readString()!!,
         parcel.readByte().toUByte(),
-        parcel.readValue(Date::class.java.classLoader) as Date,
-        parcel.readValue(Date::class.java.classLoader) as Date,
-        parcel.readValue(Date::class.java.classLoader) as Date,
-        parcel.readValue(Date::class.java.classLoader) as Date
+        Date(parcel.readLong()),
+        Date(parcel.readLong()),
+        Date(parcel.readLong()),
+        Date(parcel.readLong())
     )
 
-    override fun writeToParcel(parcel: Parcel, flags: Int)
-    {
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeString(name)
+        parcel.writeString(description)
         parcel.writeByte(mark_as_finished.toByte())
-        parcel.writeValue(started_at)
-        parcel.writeValue(deadline_at)
-        parcel.writeValue(created_at)
-        parcel.writeValue(updated_at)
+        parcel.writeLong(started_at.time)
+        parcel.writeLong(deadline_at.time)
+        parcel.writeLong(created_at.time)
+        parcel.writeLong(updated_at.time)
     }
 
     override fun describeContents(): Int
