@@ -61,15 +61,6 @@ class ToDoListActivity : AppCompatActivity() {
             }
         })
 
-        val taskAdapterClass = TaskAdapterClass(taskList)
-        recyclerView.adapter = taskAdapterClass
-
-        taskAdapterClass.onItemClick = { task ->
-            val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra("data", task)
-            startActivity(intent)
-        }
-
         // Set up SearchView
         val searchView = findViewById<SearchView>(R.id.searchView) // Mengganti 'searchView' menjadi 'SearchView'
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
