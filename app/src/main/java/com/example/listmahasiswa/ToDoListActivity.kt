@@ -1,13 +1,12 @@
 package com.example.listmahasiswa
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.SearchView // Mengganti 'searchView' menjadi 'SearchView'
+import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.appcompat.app.AppCompatActivity
 import com.example.listmahasiswa.api.RetrofitClient
 import com.example.listmahasiswa.model.ResponseModel
 import com.example.listmahasiswa.model.TaskClass
@@ -38,39 +37,31 @@ class ToDoListActivity : AppCompatActivity() {
                     val taskResponse = response.body()
                     val tasks = taskResponse?.data
 
-                    // Process the list of tasks
                     tasks?.let {
                         taskList.addAll(it)
                         task.addAll(it)
                         taskAdapter.notifyDataSetChanged()
-                        // Now tasksList contains all the tasks obtained from Retrofit
                         taskList.forEach { task ->
-                            // Handle each task
                             Log.d("Task", "ID: ${task.id}, Name: ${task.name}")
                         }
                     }
                 } else {
-                    // Handle error response
                     Log.e("API Response", "Error: ${response.code()}")
                 }
             }
 
             override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
-                // Handle network failure
                 Log.e("API Response", "Failure: ${t.message}")
             }
         })
 
-        // Set up SearchView
-        val searchView = findViewById<SearchView>(R.id.searchView) // Mengganti 'searchView' menjadi 'SearchView'
+        val searchView = findViewById<SearchView>(R.id.searchView)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                // Handle search query submission if needed
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                // Handle search query text change
                 filterTaskList(newText)
                 return true
             }
@@ -82,9 +73,9 @@ class ToDoListActivity : AppCompatActivity() {
 
         taskAdapter = TaskAdapterClass(taskList)
         recyclerView.adapter = taskAdapter
-        taskAdapter.onItemClick = {
+        taskAdapter.onItemClick = { taskItem ->
             val intent = Intent(this, TaskDetail::class.java)
-            intent.putExtra("android", it)
+            intent.putExtra("taskId", taskId)
             startActivity(intent)
         }
 
