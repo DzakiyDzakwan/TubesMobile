@@ -12,6 +12,11 @@
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_gravity="center_horizontal"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/bold"
         android:text="AgendArc"
@@ -24,6 +29,11 @@
         android:id="@+id/textViewDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_gravity="center_horizontal"
         android:layout_below="@id/textViewTitle"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/medium"
@@ -35,13 +45,15 @@
         tools:layout_editor_absoluteY="67dp" />
 
     <androidx.cardview.widget.CardView
+        android:layout_marginTop="32dp"
         android:layout_width="600px"
         android:layout_height="800px"
         android:layout_gravity="fill"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDescription"
         app:cardBackgroundColor="#ABC4D6"
         app:cardCornerRadius="20px"
-        tools:layout_editor_absoluteX="91dp"
-        tools:layout_editor_absoluteY="122dp"
         tools:visibility="visible"
         tools:ignore="MissingConstraints">
 
@@ -74,7 +86,7 @@
             android:translationY="500px" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textView_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Set Your Deadline"
@@ -98,7 +110,7 @@
             android:drawableTint="#FFEB3B"
             android:foregroundTint="#FFEB3B"
             android:text="Selesai"
-            android:translationX="340px"
+            android:translationX="320px"
             android:translationY="650px" />
 
     </androidx.cardview.widget.CardView>
