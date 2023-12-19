@@ -83,7 +83,7 @@ class ToDoListActivity : AppCompatActivity() {
         taskAdapter = TaskAdapterClass(taskList)
         recyclerView.adapter = taskAdapter
         taskAdapter.onItemClick = {
-            val intent = Intent(this, DetailActivity::class.java)
+            val intent = Intent(this, TaskDetail::class.java)
             intent.putExtra("android", it)
             startActivity(intent)
         }

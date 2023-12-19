@@ -3,10 +3,8 @@ package com.example.listmahasiswa
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-//import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.inappmessaging.model.Button
 
 class MainActivity : AppCompatActivity() {
 
