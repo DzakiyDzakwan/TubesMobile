@@ -4,8 +4,6 @@ import com.example.listmahasiswa.model.ResponseModel
 import retrofit2.Call
 import retrofit2.http.GET
 
-//import retrofit2.http.POST
-
 interface APIService
 {
     @GET("http://192.168.100.4:3333/api/v1/task/")

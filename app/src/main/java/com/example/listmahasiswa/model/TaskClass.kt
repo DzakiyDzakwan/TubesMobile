@@ -2,26 +2,35 @@ package com.example.listmahasiswa.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import java.util.Date
 
-data class TaskClass(var id:String, var name:String, var desc:String, var date:String):
-    Parcelable
+data class TaskClass(val id: Int,
+                     val name: String,
+                     val mark_as_finished: UByte,
+                     val started_at: Date,
+                     val deadline_at: Date,
+                     val created_at: Date,
+                     val updated_at: Date) : Parcelable
 {
     constructor(parcel: Parcel) : this(
+        parcel.readInt(),
         parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!
+        parcel.readByte().toUByte(),
+        parcel.readValue(Date::class.java.classLoader) as Date,
+        parcel.readValue(Date::class.java.classLoader) as Date,
+        parcel.readValue(Date::class.java.classLoader) as Date,
+        parcel.readValue(Date::class.java.classLoader) as Date
     )
-    {
-    }
 
     override fun writeToParcel(parcel: Parcel, flags: Int)
     {
-        parcel.writeString(id)
+        parcel.writeInt(id)
         parcel.writeString(name)
-        parcel.writeString(desc)
-        parcel.writeString(date)
-
+        parcel.writeByte(mark_as_finished.toByte())
+        parcel.writeValue(started_at)
+        parcel.writeValue(deadline_at)
+        parcel.writeValue(created_at)
+        parcel.writeValue(updated_at)
     }
 
     override fun describeContents(): Int
