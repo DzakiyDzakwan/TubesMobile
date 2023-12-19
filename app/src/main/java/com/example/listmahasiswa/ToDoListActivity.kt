@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.listmahasiswa.api.RetrofitClient
 import com.example.listmahasiswa.model.ResponseModel
 import com.example.listmahasiswa.model.TaskClass
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -76,6 +77,13 @@ class ToDoListActivity : AppCompatActivity()
         taskAdapter.onItemClick = {
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra("android", it)
+            startActivity(intent)
+        }
+
+        val buttonAdd = findViewById<FloatingActionButton>(R.id.buttonAddTodo)
+
+        buttonAdd.setOnClickListener {
+            val intent = Intent(this, CreateTaskActivity::class.java)
             startActivity(intent)
         }
     }
