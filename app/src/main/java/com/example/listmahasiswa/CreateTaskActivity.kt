@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import java.util.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.listmahasiswa.api.RetrofitClient
@@ -38,10 +39,22 @@ class CreateTaskActivity : AppCompatActivity()
         }
 
         submitButton.setOnClickListener {
+            val title = taskTitle.text.toString()
             val selectedDateString = dateEditText.text.toString()
-            val selectedDate = parseDateString(selectedDateString)
-            val formattedDate = formatDateToAPI(selectedDate)
-            submitData(formattedDate)
+            if (title.isNullOrBlank() or selectedDateString.isEmpty() or selectedDateString.equals(""))
+            {
+                Toast.makeText(this@CreateTaskActivity,
+                               "Tolong Isilah Jangan Malas Kali",
+                               Toast.LENGTH_SHORT).show()
+//                finish()
+            }
+            else
+            {
+                val selectedDate = parseDateString(selectedDateString)
+                val formattedDate = formatDateToAPI(selectedDate)
+                submitData(title, formattedDate)
+                finish()
+            }
         }
     }
 
@@ -81,9 +94,9 @@ class CreateTaskActivity : AppCompatActivity()
         datePickerDialog.show()
     }
 
-    private fun submitData(formattedDate: String)
+    private fun submitData(title: String, formattedDate: String)
     {
-        val task = CreateTaskModel("Task Title", formattedDate)
+        val task = CreateTaskModel(title, formattedDate)
         val call = RetrofitClient.apiService.createTask(task)
 
         call.enqueue(object : Callback<ResponseCreateTaskModel>
@@ -95,7 +108,7 @@ class CreateTaskActivity : AppCompatActivity()
                              if (response.isSuccessful)
                              {
                                  val responseBody = response.body()
-                                 Log.d("Task", "ID: ${task.name}, Name: ${task.deadline_at}")
+                                 Log.d("Task", "ID: ${responseBody}, Name: ${task.deadline_at}")
                              }
                              else
                              {

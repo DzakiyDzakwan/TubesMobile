@@ -117,25 +117,39 @@ class MainActivity : AppCompatActivity()
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onResume()
+    {
+        super.onResume()
+        // Refresh data when returning to this page
+        loadData()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+    {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_EDIT && resultCode == Activity.RESULT_OK) {
+        if (requestCode == REQUEST_CODE_EDIT && resultCode == Activity.RESULT_OK)
+        {
             // Panggil metode loadData() atau perbarui data sesuai dengan kebutuhan Anda
             loadData()
         }
     }
 
-    private fun loadData() {
+    private fun loadData()
+    {
         // Di sini, Anda perlu mengambil data terbaru melalui Retrofit atau metode lainnya
         // Misalnya, jika Anda memiliki fungsi Retrofit untuk mengambil data, Anda bisa melakukan sesuatu seperti ini:
         val apiService = RetrofitClient.apiService
         val call = apiService.getData()
 
-        call.enqueue(object : Callback<ResponseModel> {
-            override fun onResponse(call: Call<ResponseModel>, response: Response<ResponseModel>) {
-                if (response.isSuccessful) {
-                    val taskResponse = response.body()
-                    val newData = taskResponse?.data
+        call.enqueue(object : Callback<ResponseModel>
+                     {
+                         override fun onResponse(call: Call<ResponseModel>,
+                                                 response: Response<ResponseModel>)
+                         {
+                             if (response.isSuccessful)
+                             {
+                                 val taskResponse = response.body()
+                                 val newData = taskResponse?.data
 
                     newData?.let {
                         taskList.clear()

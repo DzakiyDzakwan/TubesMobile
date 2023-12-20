@@ -17,7 +17,6 @@ interface APIService
     @GET("task/")
     fun getData(): Call<ResponseModel>
 
-    //    fun getData(@Body data: DataModel): Call<ResponseModel>
     @POST("task/")
     fun createTask(@Body task: CreateTaskModel): Call<ResponseCreateTaskModel>
 
