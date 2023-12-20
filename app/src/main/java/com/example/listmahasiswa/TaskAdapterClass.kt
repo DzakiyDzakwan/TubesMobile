@@ -24,7 +24,7 @@ class TaskAdapterClass(private val taskList: ArrayList<TaskClass>): RecyclerView
     {
         val currentItem = taskList[position]
         holder.rvTaskName.text = currentItem.name
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val formatter = DateTimeFormatter.ofPattern("dd MMM YYYY", Locale.getDefault())
         val formattedDate =
             currentItem.deadline_at?.toInstant()?.atZone(ZoneId.systemDefault())?.format(formatter)
         holder.rvTaskDeadline.text = formattedDate

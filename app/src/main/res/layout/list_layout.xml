@@ -20,56 +20,53 @@
             android:id="@+id/task_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/task_desc"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/task_description"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/task_desc"
+            android:layout_width="0dp"
+            android:layout_marginHorizontal="8dp"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="8dp"
-            app:layout_constraintStart_toEndOf="@+id/task_status"
-            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            >
+            app:layout_constraintEnd_toStartOf="@+id/delete_task"
+            app:layout_constraintStart_toEndOf="@+id/task_status"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/task_name"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tugas 1"
-                android:textSize="16sp"
                 android:fontFamily="@font/medium"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/task_date"
-                />
+                android:text="Course Big Data Fundamental Asdasdasdasdasdasd asdasdasdsa AsdasdasdsaASdasdasd"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/task_date"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/regular"
                 android:text="12/12/2023"
                 android:textColor="#99000000"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/task_name"
-                />
+                android:textSize="12sp" />
 
-            <!-- Atur bias horizontal agar berada di tengah -->
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <ImageView
             android:id="@+id/delete_task"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:src="@drawable/ic_delete"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="icon_delete"
             app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:tint="@color/red"
+            app:layout_constraintStart_toEndOf="@id/task_desc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
