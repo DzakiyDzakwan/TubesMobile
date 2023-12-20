@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TodoList Kelompok X</string>
+    <string name="search_hint">Cari task disini...</string>
 </resources>

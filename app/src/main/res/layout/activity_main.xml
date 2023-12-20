@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:ignore="ExtraText">
 
     <!-- Judul -->
     <TextView
@@ -36,16 +37,19 @@
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:iconifiedByDefault="true"
-        android:queryHint="Search..."
         android:layout_below="@id/textViewDescription"
-        android:background="@drawable/rounded_searchview"/>
+        android:iconifiedByDefault="false"
+        android:background="@drawable/rounded_searchview"
+        android:padding="8dp"
+        android:queryBackground="@android:color/transparent"
+        android:queryHint="@string/search_hint"
+        android:closeIcon="@android:drawable/ic_menu_close_clear_cancel"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewTodo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/buttonAddTodo"
         android:layout_below="@id/searchView"
         android:layout_marginTop="16dp"
         />
