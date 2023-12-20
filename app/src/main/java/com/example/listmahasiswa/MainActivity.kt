@@ -1,12 +1,11 @@
 package com.example.listmahasiswa
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageView
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listmahasiswa.api.RetrofitClient
@@ -23,6 +22,9 @@ import com.google.gson.GsonBuilder
 
 class MainActivity : AppCompatActivity()
 {
+    companion object {
+        const val REQUEST_CODE_EDIT = 1 // Ganti angka 1 dengan nilai yang sesuai
+    }
 
     private lateinit var recyclerView: RecyclerView
     private var task: ArrayList<TaskClass> = arrayListOf()
@@ -99,16 +101,13 @@ class MainActivity : AppCompatActivity()
 
         taskAdapter = TaskAdapterClass(taskList)
         recyclerView.adapter = taskAdapter
-        taskAdapter.onItemClick = { task ->
-            task?.id?.let {
-                val intent = Intent(this, TaskDetail::class.java)
-                val json = gson.toJson(task)
-                Log.d("Tets", json)
-                intent.putExtra("taskId", json)
-                startActivity(intent)
-            }
+        taskAdapter.onItemClick = {
+            val intent = Intent(this, TaskDetail::class.java)
+            val json = gson.toJson(it)
+            Log.d("Tets", json)
+            intent.putExtra("taskId", json)
+            startActivityForResult(intent, REQUEST_CODE_EDIT)
         }
-
 
         val buttonAdd = findViewById<FloatingActionButton>(R.id.buttonAddTodo)
         buttonAdd.setOnClickListener {
@@ -116,17 +115,44 @@ class MainActivity : AppCompatActivity()
             startActivity(intent)
         }
 
-//        val buttonDelete = findViewById<ImageView>(R.id.delete_task)
-//        buttonDelete.setOnClickListener {
-//            val taskId = task.firstOrNull()?.id
-//            if (taskId != null) {
-//                deleteTask(taskId)
-//            } else {
-//                showToast("Task ID is null or blank.")
-//            }
-//        }
-
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_EDIT && resultCode == Activity.RESULT_OK) {
+            // Panggil metode loadData() atau perbarui data sesuai dengan kebutuhan Anda
+            loadData()
+        }
+    }
+
+    private fun loadData() {
+        // Di sini, Anda perlu mengambil data terbaru melalui Retrofit atau metode lainnya
+        // Misalnya, jika Anda memiliki fungsi Retrofit untuk mengambil data, Anda bisa melakukan sesuatu seperti ini:
+        val apiService = RetrofitClient.apiService
+        val call = apiService.getData()
+
+        call.enqueue(object : Callback<ResponseModel> {
+            override fun onResponse(call: Call<ResponseModel>, response: Response<ResponseModel>) {
+                if (response.isSuccessful) {
+                    val taskResponse = response.body()
+                    val newData = taskResponse?.data
+
+                    newData?.let {
+                        taskList.clear()
+                        taskList.addAll(it) // newData adalah data yang diperbarui
+                        taskAdapter.notifyDataSetChanged()
+                    }
+                } else {
+                    Log.e("API Response", "Error: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
+                Log.e("API Response", "Failure: ${t.message}")
+            }
+        })
+    }
+
 
     private fun getRandomDate(): Date {
         val calendar = Calendar.getInstance()
@@ -149,28 +175,4 @@ class MainActivity : AppCompatActivity()
         }
         taskAdapter.notifyDataSetChanged()
     }
-
-//    private fun deleteTask(taskId: Int?) {
-//        val apiService = RetrofitClient.apiService
-//        val call = apiService.deleteTask(taskId)
-//
-//        call.enqueue(object : Callback<Void> {
-//            override fun onResponse(call: Call<Void>, response: Response<Void>) {
-//                if (response.isSuccessful) {
-//                    showToast("Task successfully deleted")
-//                    finish()
-//                } else {
-//                    showToast("Failed to delete task")
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<Void>, t: Throwable) {
-//                showToast("Failed to connect to the server")
-//            }
-//        })
-//    }
-//
-//    private fun showToast(message: String) {
-//        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-//    }
 }
