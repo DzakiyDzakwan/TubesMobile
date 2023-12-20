@@ -40,6 +40,7 @@ class TaskDetail : AppCompatActivity() {
         buttonDelete.setOnClickListener {
             if (task != null && task.id != null) {
                 deleteTask(task.id)
+                finish()
             } else {
                 showToast("Task ID is null or blank.")
             }
@@ -77,7 +78,7 @@ class TaskDetail : AppCompatActivity() {
                 }
 
                 val retrofit = Retrofit.Builder()
-                    .baseUrl("http://192.168.1.3:3333/api/v1/")
+                    .baseUrl("http://192.168.236.147:3333/api/v1/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
 
