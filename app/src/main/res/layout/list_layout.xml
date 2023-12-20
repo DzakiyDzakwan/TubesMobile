@@ -42,7 +42,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/medium"
                 android:text="Course Big Data Fundamental Asdasdasdasdasdasd asdasdasdsa AsdasdasdsaASdasdasd"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                />
 
             <TextView
                 android:id="@+id/task_date"
