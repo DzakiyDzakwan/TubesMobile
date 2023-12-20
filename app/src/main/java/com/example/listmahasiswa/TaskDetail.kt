@@ -1,50 +1,81 @@
 package com.example.listmahasiswa
 
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.listmahasiswa.api.RetrofitClient
 import com.example.listmahasiswa.model.TaskClass
 import com.google.gson.Gson
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class TaskDetail : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detail_list)
 
-        // Retrieve the task data from the intent
         val json = intent.getStringExtra("taskId")
-
         val gson = Gson()
         val task = gson.fromJson(json, TaskClass::class.java)
 
-        // Check if the task is not null
-        if (task != null)
-        {
-            // Now you can use the task data to populate your views
+        val btnDeleteTask: Button = findViewById(R.id.buttonDelete)
+
+        if (task != null) {
             val taskNameTextView: TextView = findViewById(R.id.textViewDetailTitle)
             val taskDeadlineTextView: TextView = findViewById(R.id.textViewDetailDate)
 
             val taskName = "Task Name: ${task.name}"
             taskNameTextView.text = taskName
 
-            // Check if the deadline_at property is not null before formatting
             val formattedDate = task.deadline_at?.let {
                 val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
                 dateFormat.format(it)
-            } ?: "N/A" // Provide a default value if deadline_at is null
+            } ?: "N/A"
 
             val deadlineText = "Deadline: ${formattedDate}"
             taskDeadlineTextView.text = deadlineText
-        } else
-        {
-            // Handle the case where task is null
+        } else {
             Toast.makeText(this, "Task data not found", Toast.LENGTH_SHORT).show()
-            finish() // Close the activity if task data is not found
+            finish()
         }
+
+        btnDeleteTask.setOnClickListener {
+            if (task != null && task.id != null) {
+                deleteTask(task.id)
+            } else {
+                showToast("Task ID is null or blank.")
+            }
+        }
+
+    }
+
+    private fun deleteTask(taskId: Int?) {
+        val apiService = RetrofitClient.apiService
+        val call = apiService.deleteTask(taskId)
+
+        call.enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    showToast("Task successfully deleted")
+                    finish()
+                } else {
+                    showToast("Failed to delete task")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                showToast("Failed to connect to the server")
+            }
+        })
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

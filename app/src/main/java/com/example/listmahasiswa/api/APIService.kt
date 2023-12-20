@@ -7,6 +7,8 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.Path
 
 interface APIService
 {
@@ -16,4 +18,7 @@ interface APIService
     //    fun getData(@Body data: DataModel): Call<ResponseModel>
     @POST("task/")
     fun createTask(@Body task: CreateTaskModel): Call<ResponseCreateTaskModel>
+
+    @DELETE("task/{taskId}")
+    fun deleteTask(@Path("taskId") taskId: Int?): Call<Void>
 }
