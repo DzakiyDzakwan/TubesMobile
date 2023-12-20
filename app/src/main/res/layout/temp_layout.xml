@@ -38,34 +38,57 @@
             app:cardCornerRadius="8dp" />
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp">
 
-            <EditText
-                android:id="@+id/editText"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/task_name"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:hint="Masukkan Nama Tugas..."
-                android:inputType="text"
+                android:layout_height="wrap_content"
+                android:inputType="none"
                 android:imeOptions="actionDone"
                 android:maxLines="1"
-                android:padding="10dp"
-                android:background="@drawable/edit_text_background"
-                android:textColor="@color/black"
-                android:textSize="16sp"/>
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:hint="Masukkan nama tugas..."
+                android:textSize="16sp"
+                android:focusable="false"
+                android:drawableStart="@drawable/ic_calendar"
+                android:onClick="showDatePicker"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/deadline_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:imeOptions="actionDone"
+                android:maxLines="1"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:hint="Pilih tanggal deadline..."
+                android:textSize="16sp"
+                android:focusable="false"
+                android:drawableStart="@drawable/ic_calendar"
+                android:onClick="showDatePicker"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:text="Tambah Tugas"
+            android:layout_gravity="center"
+            android:background="@drawable/button_background" />
     </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-
-
 </RelativeLayout>
