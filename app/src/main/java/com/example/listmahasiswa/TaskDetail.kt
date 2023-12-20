@@ -7,6 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.listmahasiswa.api.APIService
+import com.example.listmahasiswa.api.RetrofitClient
 import com.example.listmahasiswa.model.ResponseCreateTaskModel
 import com.example.listmahasiswa.model.TaskClass
 import com.google.gson.Gson
@@ -32,6 +33,16 @@ class TaskDetail : AppCompatActivity() {
 
         val gson = Gson()
         val task = gson.fromJson(json, TaskClass::class.java)
+
+        val buttonDelete: Button = findViewById(R.id.delete_task)
+        buttonDelete.setOnClickListener {
+            if (task != null && task.id != null) {
+                deleteTask(task.id)
+            } else {
+                showToast("Task ID is null or blank.")
+            }
+        }
+
 
         // Check if the task is not null
         if (task != null)
@@ -66,7 +77,7 @@ class TaskDetail : AppCompatActivity() {
                 }
 
                 val retrofit = Retrofit.Builder()
-                    .baseUrl("http://192.168.1.3:3333/api/v1/")
+                    .baseUrl("http://192.168.236.147:3333/api/v1/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
 
@@ -109,5 +120,29 @@ class TaskDetail : AppCompatActivity() {
             finish()
         }
 
+    }
+
+    private fun deleteTask(taskId: Int?) {
+        val apiService = RetrofitClient.apiService
+        val call = apiService.deleteTask(taskId)
+
+        call.enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    showToast("Task successfully deleted")
+                    finish()
+                } else {
+                    showToast("Failed to delete task")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                showToast("Failed to connect to the server")
+            }
+        })
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

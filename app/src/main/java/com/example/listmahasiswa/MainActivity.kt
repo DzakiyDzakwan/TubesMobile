@@ -4,7 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listmahasiswa.api.RetrofitClient
@@ -97,19 +99,33 @@ class MainActivity : AppCompatActivity()
 
         taskAdapter = TaskAdapterClass(taskList)
         recyclerView.adapter = taskAdapter
-        taskAdapter.onItemClick = {
-            val intent = Intent(this, TaskDetail::class.java)
-            val json = gson.toJson(it)
-            Log.d("Tets", json)
-            intent.putExtra("taskId", json)
-            startActivity(intent)
+        taskAdapter.onItemClick = { task ->
+            task?.id?.let {
+                val intent = Intent(this, TaskDetail::class.java)
+                val json = gson.toJson(task)
+                Log.d("Tets", json)
+                intent.putExtra("taskId", json)
+                startActivity(intent)
+            }
         }
+
 
         val buttonAdd = findViewById<FloatingActionButton>(R.id.buttonAddTodo)
         buttonAdd.setOnClickListener {
             val intent = Intent(this, CreateTaskActivity::class.java)
             startActivity(intent)
         }
+
+//        val buttonDelete = findViewById<ImageView>(R.id.delete_task)
+//        buttonDelete.setOnClickListener {
+//            val taskId = task.firstOrNull()?.id
+//            if (taskId != null) {
+//                deleteTask(taskId)
+//            } else {
+//                showToast("Task ID is null or blank.")
+//            }
+//        }
+
     }
 
     private fun getRandomDate(): Date {
@@ -133,4 +149,28 @@ class MainActivity : AppCompatActivity()
         }
         taskAdapter.notifyDataSetChanged()
     }
+
+//    private fun deleteTask(taskId: Int?) {
+//        val apiService = RetrofitClient.apiService
+//        val call = apiService.deleteTask(taskId)
+//
+//        call.enqueue(object : Callback<Void> {
+//            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+//                if (response.isSuccessful) {
+//                    showToast("Task successfully deleted")
+//                    finish()
+//                } else {
+//                    showToast("Failed to delete task")
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<Void>, t: Throwable) {
+//                showToast("Failed to connect to the server")
+//            }
+//        })
+//    }
+//
+//    private fun showToast(message: String) {
+//        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+//    }
 }
