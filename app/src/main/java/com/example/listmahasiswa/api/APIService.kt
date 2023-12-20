@@ -3,11 +3,13 @@ package com.example.listmahasiswa.api
 import com.example.listmahasiswa.model.CreateTaskModel
 import com.example.listmahasiswa.model.ResponseCreateTaskModel
 import com.example.listmahasiswa.model.ResponseModel
+import com.example.listmahasiswa.model.TaskClass
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Body
 import retrofit2.http.DELETE
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface APIService
@@ -21,4 +23,7 @@ interface APIService
 
     @DELETE("task/{taskId}")
     fun deleteTask(@Path("taskId") taskId: Int?): Call<Void>
+  
+    @PUT("task/{id}")
+    fun updateTask(@Path("id") id: Int, @Body updatedTask: TaskClass?): Call<ResponseCreateTaskModel>
 }

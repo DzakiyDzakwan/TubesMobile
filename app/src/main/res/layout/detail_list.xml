@@ -59,8 +59,8 @@
                     android:layout_height="wrap_content"
                     android:buttonTint="@android:color/black" />
 
-                <TextView
-                    android:id="@+id/textViewDetailTitle"
+                <EditText
+                    android:id="@+id/edit_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4pt"
@@ -72,8 +72,8 @@
             </RadioGroup>
 
             <!-- Tanggal Detail -->
-            <TextView
-                android:id="@+id/textViewDetailDate"
+            <EditText
+                android:id="@+id/edit_deadline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Detail Date"
@@ -82,16 +82,16 @@
                 android:layout_below="@+id/radioGroupDetailTitle"
                 android:fontFamily="@font/bold"
                 android:layout_marginTop="8dp"/>
-            <TextView
-                android:id="@+id/textViewDetailDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Detail Description"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
-                android:layout_below="@+id/textViewDetailDate"
-                android:fontFamily="@font/regular"
-                android:layout_marginTop="8dp"/>
+<!--            <TextView-->
+<!--                android:id="@+id/textViewDetailDescription"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Detail Description"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:layout_below="@+id/textViewDetailDate"-->
+<!--                android:fontFamily="@font/regular"-->
+<!--                android:layout_marginTop="8dp"/>-->
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
@@ -105,7 +105,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/buttonEdit"
+                android:id="@+id/button_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -115,18 +115,6 @@
                 android:padding="8dp"
                 android:fontFamily="@font/medium"
                 android:backgroundTint="@color/yellow"/>
-
-            <Button
-                android:id="@+id/buttonDelete"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="1"
-                android:text="Delete"
-                android:fontFamily="@font/medium"
-                android:backgroundTint="@color/red"
-                />
 
         </LinearLayout>
 
