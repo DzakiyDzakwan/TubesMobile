@@ -1,5 +1,6 @@
 package com.example.listmahasiswa
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,6 +22,9 @@ import com.google.gson.GsonBuilder
 
 class MainActivity : AppCompatActivity()
 {
+    companion object {
+        const val REQUEST_CODE_EDIT = 1 // Ganti angka 1 dengan nilai yang sesuai
+    }
 
     private lateinit var recyclerView: RecyclerView
     private var task: ArrayList<TaskClass> = arrayListOf()
@@ -102,7 +106,7 @@ class MainActivity : AppCompatActivity()
             val json = gson.toJson(it)
             Log.d("Tets", json)
             intent.putExtra("taskId", json)
-            startActivity(intent)
+            startActivityForResult(intent, REQUEST_CODE_EDIT)
         }
 
         val buttonAdd = findViewById<FloatingActionButton>(R.id.buttonAddTodo)
@@ -110,7 +114,45 @@ class MainActivity : AppCompatActivity()
             val intent = Intent(this, CreateTaskActivity::class.java)
             startActivity(intent)
         }
+
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_EDIT && resultCode == Activity.RESULT_OK) {
+            // Panggil metode loadData() atau perbarui data sesuai dengan kebutuhan Anda
+            loadData()
+        }
+    }
+
+    private fun loadData() {
+        // Di sini, Anda perlu mengambil data terbaru melalui Retrofit atau metode lainnya
+        // Misalnya, jika Anda memiliki fungsi Retrofit untuk mengambil data, Anda bisa melakukan sesuatu seperti ini:
+        val apiService = RetrofitClient.apiService
+        val call = apiService.getData()
+
+        call.enqueue(object : Callback<ResponseModel> {
+            override fun onResponse(call: Call<ResponseModel>, response: Response<ResponseModel>) {
+                if (response.isSuccessful) {
+                    val taskResponse = response.body()
+                    val newData = taskResponse?.data
+
+                    newData?.let {
+                        taskList.clear()
+                        taskList.addAll(it) // newData adalah data yang diperbarui
+                        taskAdapter.notifyDataSetChanged()
+                    }
+                } else {
+                    Log.e("API Response", "Error: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
+                Log.e("API Response", "Failure: ${t.message}")
+            }
+        })
+    }
+
 
     private fun getRandomDate(): Date {
         val calendar = Calendar.getInstance()
