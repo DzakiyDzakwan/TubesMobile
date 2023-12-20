@@ -5,17 +5,22 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.listmahasiswa.model.TaskClass
+import com.google.gson.Gson
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class TaskDetail : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detail_list)
 
         // Retrieve the task data from the intent
-        val task: TaskClass? = intent.getParcelableExtra("taskId")
+        val json = intent.getStringExtra("taskId")
+
+        val gson = Gson()
+        val task = gson.fromJson(json, TaskClass::class.java)
 
         // Check if the task is not null
         if (task != null)
@@ -28,7 +33,7 @@ class TaskDetail : AppCompatActivity() {
             taskNameTextView.text = taskName
 
             // Check if the deadline_at property is not null before formatting
-            val formattedDate = task.deadlineAt?.let {
+            val formattedDate = task.deadline_at?.let {
                 val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
                 dateFormat.format(it)
             } ?: "N/A" // Provide a default value if deadline_at is null

@@ -7,10 +7,10 @@ import java.util.Date
 data class TaskClass(val id: Int?,
                      val name: String,
                      val markAsFinished: Boolean,
-                     val startedAt: Date?,
-                     val deadlineAt: Date?,
-                     val createdAt: Date?,
-                     val updatedAt: Date?) : Parcelable
+                     val started_at: Date?,
+                     val deadline_at: Date?,
+                     val created_at: Date?,
+                     val updated_at: Date?) : Parcelable
 {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
@@ -24,16 +24,17 @@ data class TaskClass(val id: Int?,
 
     )
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
+    override fun writeToParcel(parcel: Parcel, flags: Int)
+    {
         parcel.writeInt(id ?: 0) // Use 0 as a default value if id is null
         parcel.writeString(name)
 //        parcel.writeString(description)
         parcel.writeByte(if (markAsFinished) 1 else 0)
         // Write nullable dates with null checks
-        parcel.writeLong(startedAt?.time ?: 0L)
-        parcel.writeLong(deadlineAt?.time ?: 0L)
-        parcel.writeLong(createdAt?.time ?: 0L)
-        parcel.writeLong(updatedAt?.time ?: 0L)
+        parcel.writeLong(started_at?.time ?: 0L)
+        parcel.writeLong(deadline_at?.time ?: 0L)
+        parcel.writeLong(created_at?.time ?: 0L)
+        parcel.writeLong(updated_at?.time ?: 0L)
     }
 
     override fun describeContents(): Int

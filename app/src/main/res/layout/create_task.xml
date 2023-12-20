@@ -85,6 +85,7 @@
             android:translationX="20px"
             android:translationY="500px" />
 
+
         <TextView
             android:id="@+id/textView_date"
             android:layout_width="wrap_content"

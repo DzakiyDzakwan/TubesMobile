@@ -16,35 +16,50 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 import kotlin.random.Random
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity()
+{
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var task: ArrayList<TaskClass>
+    private var task: ArrayList<TaskClass> = arrayListOf()
     private var taskList: ArrayList<TaskClass> = arrayListOf()
     private lateinit var taskAdapter: TaskAdapterClass
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    private val gson: Gson = GsonBuilder()
+        .setFieldNamingStrategy(CustomNamingStrategy)
+        .create()
+
+    // ...
+
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        task = arrayListOf(
-            TaskClass(null, "Tugas 1", true, null, getRandomDate(), Date(), Date()),
-            TaskClass(null, "Tugas 2", false, null, getRandomDate(), Date(), Date()),
-            TaskClass(null, "Tugas 3", false, null, getRandomDate(), Date(), Date()),
-            TaskClass(null, "Tugas 4", false, null, getRandomDate(), Date(), Date()),
-            TaskClass(null, "Tugas 5", false, null, getRandomDate(), Date(), Date()),
-            TaskClass(null, "Tugas 6", false, null, getRandomDate(), Date(), Date()),
-        )
+
+//        task = arrayListOf(
+//            TaskClass(null, "Tugas 1", true, null, getRandomDate(), Date(), Date()),
+//            TaskClass(null, "Tugas 2", false, null, getRandomDate(), Date(), Date()),
+//            TaskClass(null, "Tugas 3", false, null, getRandomDate(), Date(), Date()),
+//            TaskClass(null, "Tugas 4", false, null, getRandomDate(), Date(), Date()),
+//            TaskClass(null, "Tugas 5", false, null, getRandomDate(), Date(), Date()),
+//            TaskClass(null, "Tugas 6", false, null, getRandomDate(), Date(), Date()),
+//        )
 
         val apiService = RetrofitClient.apiService
         val call = apiService.getData()
 
-        call.enqueue(object : Callback<ResponseModel> {
-            override fun onResponse(call: Call<ResponseModel>, response: Response<ResponseModel>) {
-                if (response.isSuccessful) {
-                    val taskResponse = response.body()
-                    val tasks = taskResponse?.data
+        call.enqueue(object : Callback<ResponseModel>
+                     {
+                         override fun onResponse(call: Call<ResponseModel>,
+                                                 response: Response<ResponseModel>)
+                         {
+                             if (response.isSuccessful)
+                             {
+                                 val taskResponse = response.body()
+                                 val tasks = taskResponse?.data
 
                     tasks?.let {
                         taskList.addAll(it)
@@ -84,7 +99,9 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = taskAdapter
         taskAdapter.onItemClick = {
             val intent = Intent(this, TaskDetail::class.java)
-            intent.putExtra("taskId", it)
+            val json = gson.toJson(it)
+            Log.d("Tets", json)
+            intent.putExtra("taskId", json)
             startActivity(intent)
         }
 
@@ -105,8 +122,13 @@ class MainActivity : AppCompatActivity() {
         taskList.clear()
         if (query.isNullOrBlank()) {
             taskList.addAll(task)
-        } else {
-            val filteredList = task.filter { it.name.contains(query, ignoreCase = true) }
+            Log.d("FilterTaskList", "Original taskList: $taskList")
+        } else
+        {
+            taskList.addAll(task)
+            val filteredList = taskList.filter { it.name.contains(query, ignoreCase = true) }
+            Log.d("FilterTaskList", "Filtered list: $filteredList")
+            taskList.clear()
             taskList.addAll(filteredList)
         }
         taskAdapter.notifyDataSetChanged()
