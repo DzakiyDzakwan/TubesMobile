@@ -1,5 +1,7 @@
 package com.example.listmahasiswa
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -88,17 +90,22 @@ class TaskDetail : AppCompatActivity() {
                                 if (updatedTask != null) {
                                     taskNameTextView.text = "${updatedName}"
                                     taskDeadlineTextView.text = "${updatedDeadline}"
-
+                                    val intent = Intent()
+                                    setResult(Activity.RESULT_OK, intent)
+                                    finish()
                                     Toast.makeText(this@TaskDetail, "Data updated successfully", Toast.LENGTH_SHORT).show()
+                                    finish()
                                 }
                             } else {
                                 Toast.makeText(this@TaskDetail, "Failed to update data", Toast.LENGTH_SHORT).show()
+                                finish()
                             }
                         }
 
                         override fun onFailure(call: Call<ResponseCreateTaskModel>, t: Throwable) {
                             Log.e("UpdateTask", "Failed to update data: ${t.message}")
-                            Toast.makeText(this@TaskDetail, "Failed to update data cuy: ${t.message}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@TaskDetail, "Berhasil update data", Toast.LENGTH_SHORT).show()
+                            finish()
                         }
                     })
                 }
