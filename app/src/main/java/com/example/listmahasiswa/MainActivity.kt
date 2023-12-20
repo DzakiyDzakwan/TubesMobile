@@ -101,6 +101,7 @@ class MainActivity : AppCompatActivity()
 
         taskAdapter = TaskAdapterClass(taskList)
         recyclerView.adapter = taskAdapter
+        
         taskAdapter.onItemClick = {
             val intent = Intent(this, TaskDetail::class.java)
             val json = gson.toJson(it)
@@ -111,6 +112,7 @@ class MainActivity : AppCompatActivity()
 
         val buttonAdd = findViewById<FloatingActionButton>(R.id.buttonAddTodo)
         buttonAdd.setOnClickListener {
+        //val intent = Intent(this, CreateTaskActivity::class.java)
             val intent = Intent(this, CreateTaskActivity::class.java)
             startActivity(intent)
         }
